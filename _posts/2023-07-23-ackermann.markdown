@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Ackermann functions of the form $A(2,n)$"
 date:   2023-07-23 17:56:57 +0100
 categories: jekyll update
 ---
