@@ -1,29 +1,88 @@
 ---
 layout: post
-title:  "Ackermann functions of the form $A(2,n)$"
+title:  "Reducing 2-ary Ackermann recurrences using Lisp notation"
 date:   2023-07-23 17:56:57 +0100
-categories: jekyll update
+categories: sicp
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-Jekyll requires blog post files to be named according to the following format:
+This post is a result of me reaching Exercise 1.10 in [_Structure and Interpretation of Computer Programs_](sicp) and finding out that GitHub released support for [mathemtical expressions on Markdown](math-support). There will probably be more posts on SICP exercises as I progress through the book.
 
-`YEAR-MONTH-DAY-title.MARKUP`
+Some familiarity with Lisp syntax is needed. The opening pages of the book gives us a suitable way to do this by stating that, 
+> when we describe a language, we should pay particular attention to the means that the language provides for combining simple ideas to form more complex ideas.
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+And this idea can be limited to three ideas:
+- **primitive expressions**, which represent the simplest entities the
+language is concerned with,
+- **means of combination**, by which compound elements are built
+from simpler ones, and
+- **means of abstraction**, by which compound elements can be named
+and manipulated as units.
 
-Jekyll also offers powerful support for code snippets:
+Primitive expressions in Lisp are nothing you wouldn't find in any other language: integers, strings, booleans and floats. You can assign names to these values using `define`,
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+```lisp
+(define radius 3.5)
+> radius
+3.5
+```
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+combinations of these expressions with primitive procedures are created using _prefix notation_,
+```lisp
+> (* 25 4 12)
+1200
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+> (+ 2.7 10)
+12.7
+
+> (/ 10 5)
+2
+```
+
+and such operations can be nested to produce compound operations.
+
+```lisp
+> (+ (* 3 5) (- 10 6))
+19
+```
+
+Functions, called _procedures_ in Lisp, are an abstraction technique by which such compound operations can be named and called.
+```lisp
+(define (square x) (* x x))
+
+> (square 5)
+25
+```
+
+Control flow is described in Lisp using the `cond` or `if` where the former allows for an _n-ary_ case analysis.
+
+```lisp
+(define (abs x)
+  (cond 
+    ((> x 0) x)
+    ((= x 0) 0)
+    ((< x 0) (- x))
+  )
+)
+
+> (abs -3)
+3
+```
+However, the notation above is not practised where the brackets are lined up to elucidate the syntax. Since, this can lead to really long files to read, we would write it instead as:
+
+```lisp
+(define (abs x)
+  (cond ((> x 0) x)
+        ((= x 0) 0)
+        ((< x 0) (- x))))
+```
+
+And that's all we need to tackle Exercise 1.10 which is given as follows.
+<br><br>
+{:refdef: style="text-align: center;"}
+![](/img/ex1.10.png){:width="500"}
+{: refdef}
+
+We will deal with the second half of the question.
+
+[sicp]: https://web.mit.edu/6.001/6.037/sicp.pdf
+[math-support]: https://github.blog/2022-05-19-math-support-in-markdown/
