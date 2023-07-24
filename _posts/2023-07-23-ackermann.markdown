@@ -2,7 +2,7 @@
 layout: post
 title:  "Reducing 2-ary Ackermann recurrence functions using Lisp notation"
 date:   2023-07-23 17:56:57 +0100
-categories: sicp
+tags: sicp
 usemathjax: true
 ---
 
