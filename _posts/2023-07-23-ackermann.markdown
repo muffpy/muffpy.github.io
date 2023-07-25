@@ -87,7 +87,7 @@ However, the notation above is not practised where the brackets are lined up to 
 And that's all we need to tackle Exercise 1.10 which is given below.
 
 ## Exercise 1.10
-Before we start writing down the math, let us add MathJax support to our static site generator Jekyll using Vincent Zhang's [tutorial](http://webdocs.cs.ualberta.ca/~zichen2/blog/coding/setup/2019/02/17/how-to-add-mathjax-support-to-jekyll.html). MathJax is JavaScript library that scans the page for mathematical markup, and typesets the mathematical information accordingly. All we need to do is add the public CDN `<script>` tags to our base `head.html`.
+Before we start writing down the math, let us add MathJax support to our static site generator Jekyll using Vincent Zhang's [tutorial](http://webdocs.cs.ualberta.ca/~zichen2/blog/coding/setup/2019/02/17/how-to-add-mathjax-support-to-jekyll.html). MathJax is JavaScript library that scans the page for mathematical markup, and typesets the mathematical information accordingly. All we need to do is add the public CDN `<script>` tags to our base `head.html`. Note that the resource identifier should use HTTPS in the `<script>` tag.
 
 <br><br>
 {:refdef: style="text-align: center;"}
@@ -166,7 +166,7 @@ _`(A 3 3)`_
 (A 2 4)
 ```
 
-For the second half of the question, we already know that $g(n) = 2^n$ and $f(n) = 2n$ is obvious. To solve for $h(n)$,
+For the second half of the question, we already know that $g(n) = 2^n$ and $f(n) = 2n$ is obvious. We solve for $h(n)$. Note that we're now writing Lisp notation using TeX typesetting. Recall that $(A \ x \ y)$ means initiating the procedure `A` with arguments `x` and `y`.
 
 $$
 \begin{aligned}
@@ -174,23 +174,29 @@ h(n) &= (A \ 2 \ n) \\
 &= (A \ 1 \ (A \ 2 \ (n-1))) \\
 &= (A \ 1 \ (A \ 1 \ (A \ 2 \ (n-2)))) \\
 &= \underbrace{(A \ 1 \ (A \ 1 \ \ldots \ldots}_{k \text{ times}} (A \ 2 \ (n-k)) \ldots \ldots)) \\
-&= (A \ 1 \ (A \ 1 \ \ldots (A \ 2 \ 1) \ldots )) \ \ \textrm{for k = n - 1} \\
+&= (A \ 1 \ (A \ 1 \ \ldots (A \ 2 \ 1) \ldots )) \ \ \text{for} \ \ k = n - 1 \\
 &= \underbrace{(A \ 1 \ (A \ 1 \ \ldots}_{n \text{ times}} (2) \ldots )) \\
 \end{aligned}
 $$
 
 
-By representing $k$ function compositions using $\ f^k(n)$, we have,
+By representing $k$ function compositions of $f(n)$ using $\ f^k(n)$, we have,
 
 
 $$
 \begin{aligned}
-&= g^n(2) = \underbrace{2^{2^{2^{⋰^{2}}}}}_{n \text{ times}} \hspace{4.5cm}
+h(n) &= g^n(2) = \underbrace{2^{2^{2^{⋰^{2}}}}}_{n \text{ times}} \hspace{5.5cm}
 \end{aligned}
 $$
 
 ## Ackermann functions of the form $A(k, n)$
 
 
-
 And we're done.
+
+## See also
+- [Pointless Large Number Stuff - Knuth's up-arrow](https://sites.google.com/site/pointlesslargenumberstuff/home/2/uparrows)
+- [Wait But Why: From 1,000,000 to Graham’s Number](https://waitbutwhy.com/2014/11/1000000-grahams-number.html)
+
+
+## Comments
