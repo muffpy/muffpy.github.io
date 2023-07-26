@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Reducing 2-ary Ackermann recurrence functions using Scheme notation"
+title:  "SICP, Ackermann functions and Really Large Numbers"
 date:   2023-07-23 17:56:57 +0100
 tags: sicp
 usemathjax: true
