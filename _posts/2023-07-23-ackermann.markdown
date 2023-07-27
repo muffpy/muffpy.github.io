@@ -166,7 +166,9 @@ _`(A 3 3)`_
 (A 2 4)
 ```
 
-For the second half of the question, we already know that $g(n) = 2^n$ for $n>0$ and $f(n) = 2n$ is obvious. We solve for $h(n)$. Note that we're now writing Scheme notation using TeX typesetting. Recall that $(A \ x \ y)$ means initiating the procedure `A` with arguments `x` and `y`.
+For the second half of the question, we already know that $g(n) = 2^n$ for $n>0$ and $f(n) = 2n$ is obvious. We solve for $h(n)$. 
+
+**Note that we're now writing Scheme notation using TeX typesetting. Recall that $(A \ x \ y)$ means initiating the procedure `A` with arguments `x` and `y`.**
 
 $$
 \begin{aligned}
@@ -191,7 +193,7 @@ A(2,n) &= h(n) = g^{n-1}(2) = \underbrace{2^{2^{2^{⋰^{2}}}}}_{n \text{ times}}
 \end{aligned}
 $$
 
-The process of repeatedly exponentiating an integer is called _tetration_. You can guess this will lead to really large numbers quickly. Consider $A(2, 5)$ and $A(2,6)$:
+The process of repeatedly exponentiating an integer to build a power tower like above is called _tetration_. You can guess this will lead to really large numbers quickly. Consider $A(2, 5)$ and $A(2,6)$:
 
 $$
 \begin{aligned}
@@ -201,7 +203,7 @@ A(2,6) &= g^5(2) = 2^{2^{65536}} \thickapprox 10^{10^{19727}}
 $$
 
 <details>
-    <summary>Click this to see what the first number looks like</summary>
+    <summary>Click the triangle to see what the first number looks like</summary>
     2^65,536 = 2003529930406846464979072351560255750447825475569751419265016973710894059556311453089506130880933
 34810103823434290726318182294938211881266886950636476154702916504187191635158796634721944293092798
 20843091048559905701593189596395248633723672030029169695921561087649488892540908059114570376752085
@@ -410,20 +412,111 @@ The second number is 2 to the power of 2003529930...............5719156736 and i
 
 To put the second number into perspective, the number of Planck volumes (cubic Planck lengths) in the observable universe is around $4.65 \times 10^{185}$.
 
-Let us see where larger values of $x$ and $y$ will take us. We are now done with our exercise and entering the territory of insanely large numbers...
+Let us see where larger values of $x$ and $y$ will take us. We are now done with our exercise and entering the territory of really large numbers...
 
 ## Knuth's up-arrows
+Consider $A(3, n)$. We can derive a mathematical definition in the same way as we previously did.
 
-Can we extend this to the general case $A(k, n)$ where k and n are non-negative integers?
+$$
+\begin{aligned}
+(A \ 3 \ n) &= (A \ 2 \ (A \ 3 \ (n-1))) \\
+&= \underbrace{(A \ 2 \ (A \ 2 \ \ldots \ldots}_{k \text{ times}} (A \ 3 \ (n-k)) \ldots \ldots)) \\
+&= \underbrace{(A \ 2 \ (A \ 2 \ \ldots}_{n-1 \text{ times}} (2) \ldots )) \ \ \text{for} \ \ k = n - 1 \\
+&= h^{n-1}(2)
+\end{aligned}
+$$
+
+What does $h^{n-1}(2)$ look like? Recall that $n$ defines the number of 2's in a power tower. By iterating $h(n)$ with itself, we are stacking power towers on top of each other $n$ times. For example, consider $A(3,4)$:
+ 
+$$
+\begin{aligned}
+(A \ 3 \ 4) &= h^3(2) \\
+&= h(h(h(2))) \\
+&= h(h(\underbrace{2^{2^{⋰^{2}}}}_{2})) = h(\underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{2}}) = \underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{2}}}
+\end{aligned}
+$$
+
+And breaking that down we have,
+
+$$
+\begin{aligned}
+\underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{2}}} = \underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{2^2}} = \underbrace{2^{2^{⋰^{2}}}}_{2^{2^{2^2}}} = \underbrace{2^{2^{⋰^{2}}}}_{65536 \text{ times  }}
+\end{aligned}
+$$
+
+$A(3,4)$ is a power tower of 65,536 two's! You can see how drastic and jumpy the growth rate is for these functions. We can try to represent $A(3,n)$ as follows,
+
+$$
+\begin{aligned}
+A(3,n) = h^{n-1}(2) = \left. \underbrace{2^{2^{⋰^{2}}}}_{\underbrace{2^{2^{⋰^{2}}}}_{\underbrace{\vdots}_{2}}} \right\}n \ \ \ \ \text{for } n>0
+\end{aligned}
+$$
+
+Although this notation using braces helps elucidate tetration and _pentation_ as we've just figured out, it can get cumbersome. We introduce Knuth's up-arrow notation ($\uparrow$) specifically made for very large integers by Don Knuth in 1976.
+
+- the single up-arrow represents exponentiation
+
+$$
+\begin{aligned}
+a \uparrow b = a^b = \underbrace{a \times a \times \cdots \times a}_{b \text{ times}}
+\end{aligned}
+$$
+
+- the double arrow represents tetration
+
+$$
+\begin{aligned}
+a \uparrow \uparrow b = \underbrace{a^{a^{⋰^{a}}}}_{b \text{ times}} = \underbrace{a \uparrow (a \uparrow (\cdots \uparrow a))}_{b \text { times}}
+\end{aligned}
+$$
+
+- the triple arrow represents pentation
+
+$$
+\begin{aligned}
+a \uparrow \uparrow \uparrow b = \underbrace{a \uparrow \uparrow (a \uparrow \uparrow (\cdots \uparrow \uparrow a))}_{b \text { times}}
+\end{aligned}
+$$
+
+... and so on. 
+
+**A general rule is that $n$ arrow ops expand into $n-1$ right-associative series of arrow ops.**
+
+Using this rule, our new formula for $A(3,n)$ becomes amazingly simple and intuitive.
+
+$$
+\begin{aligned}
+A(3,n) &= 2 \uparrow \uparrow \uparrow n
+\end{aligned}
+$$
+
+For a quick sanity check, let us calculate $A(3,4)$ as before.
+
+$$
+\begin{aligned}
+A(3,4) &= 2 \uparrow \uparrow \uparrow 4 \\
+&= 2 \uparrow \uparrow (2 \uparrow \uparrow (2 \uparrow \uparrow 2)) \\
+&= 2 \uparrow \uparrow (2 \uparrow \uparrow 4) \\
+&= 2 \uparrow \uparrow (2 \uparrow (2 \uparrow (2 \uparrow 2))) \\
+&= 2 \uparrow \uparrow 65536 \\
+&= \underbrace{2 \uparrow 2 \uparrow \cdots \uparrow 2}_{65536 \text{ copies of 2}}
+\end{aligned}
+$$
+
+Just as before, we have a power tower of two's with length 65536.
+
+Can we now find a closed-form function for the general case $A(n, k)$ where n and k are non-negative integers?
 
 ## Closed form of the Ackermann function
 
+Yes, we can.
 
 And we're done.
 
 ## See also
 - [Why SICP matters](https://people.eecs.berkeley.edu/~bh/sicp.html)
 - [Why calculating is better than scheming](https://www.cs.kent.ac.uk/people/staff/dat/miranda/wadler87.pdf) (as an antithesis to the former post)
+- [Mathematics and Computer Science: Coping with Finiteness](http://www.sciacchitano.it/Spazio/Coping%20with%20Finiteness.pdf)
 - [Pointless Large Number Stuff: Knuth's up-arrow](https://sites.google.com/site/pointlesslargenumberstuff/home/2/uparrows)
 - [Wait But Why: From 1,000,000 to Graham’s Number](https://waitbutwhy.com/2014/11/1000000-grahams-number.html)
 
