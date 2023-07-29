@@ -480,7 +480,14 @@ $$
 
 ... and so on. 
 
-**A general rule is that $n$ arrow ops expand into $n-1$ right-associative series of arrow ops.**
+**Definition 1.**  _A general rule is that $m$ arrow ops expand into $m-1$ right-associative series of arrow ops._
+
+$$
+\begin{aligned}
+a \uparrow^{m} b = \underbrace{a \uparrow^{m-1} (a \uparrow^{m-1} (\cdots \uparrow^{m-1} a))}_{b \text{ copies}}
+\end{aligned}
+$$
+
 
 Using this rule, our new formula for $A(3,n)$ becomes amazingly simple and intuitive.
 
@@ -505,11 +512,121 @@ $$
 
 Just as before, we have a power tower of two's with length 65536.
 
-Can we now find a closed-form function for the general case $A(n, k)$ where n and k are non-negative integers?
+Can we now find a closed-form function for the general case $A(m, n)$ where m and n are non-negative integers?
 
-## Closed form of the Ackermann function
+## Closed-form of the Ackermann function
 
 Yes, we can.
+
+We can guess and conjecture from the previous sections the following claim.
+<style>
+.claim {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+.claim:before {
+    content: "Claim.";
+    font-weight: bold;
+    font-style: normal;
+}
+.proof {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.proof:before {
+    content: "Proof.";
+    font-style: italic;
+}
+.qed {
+    content: "\25FC";
+    float:right;
+}
+</style>
+**Claim 1.** A closed-form formal definition of the Ackermann function can be written as
+
+$$
+A(m, n) = 
+\begin{cases}
+2n&\text{if }m=0\\
+0&\text{if }m\ge1\text{ and }n=0\\
+2 \uparrow^m  n&\text{ otherwise}
+\end{cases}
+$$
+
+where $\uparrow^m$ represents $m$ up-arrow ops. This is easily proven by straightforward induction.
+
+<div class="proof"> </div>
+Let us first rewrite the recursive defintion of $A$ (which we will denote now by $A^r$) using mathematical function notation.
+
+$$
+A^r(m,n)=
+\begin{cases}
+2n&\text{if }m=0\\
+0&\text{if }m\ge1\text{ and }n=0\\
+2&\text{if }m\ge1\text{ and }n=1\\
+A\big(m-1,A(m,n-1)\big)&\text{if }m\ge1\text{ and }n\ge2.
+\end{cases}
+$$
+
+Generally speaking, to prove something like this, it's natural for the structure of the induction to mirror the structure of the recursive definition (since in some ways, they are one and the same). So, for our case, we want an induction method based on cases:
+
+1. $∀n. P(0,n)$
+2. $∀m. P(1+m,0)$
+3. $∀m. P(1+m,1)$
+4. $∀m(∀n. P(m,n)) ∧ ∀n. P(1+m,1+n) → P(1+m,2+n)$
+
+And this isn't too difficult to derive from the normal principle of induction. To prove $∀m∀ n. P(m,n)$ where $m, n \geq 0$:
+- First induct on $𝑚$
+  - Case 1 above covers the base case for this, when $𝑚=0$.
+
+    $$
+    \begin{aligned}
+    A^r(0,n) = 2n = 2 \uparrow^0 n = 2 \times n = 2n  && \text{ (first sub-case of A)}
+    \end{aligned}
+    $$
+  - For the inductive step, we are given $∀𝑛.𝑃(𝑚,𝑛)$ and need to prove $∀𝑛.𝑃(1+𝑚,𝑛)$, do this by induction on $𝑛$
+    - When $𝑛=0$, case 2 covers this.
+
+      $$
+      \begin{aligned}
+      A^r(1+m,0) = 0 = 2 \uparrow^{1+m} 0 = 0  && \text{ (second sub-case of A)}
+      \end{aligned}
+      $$
+    - When $𝑛=1$, case 3 covers this.
+
+      $$
+      \begin{aligned}
+      A^r(1+m,1) = 2 = 2 \uparrow^{1+m} 1 = 2  && \text{ (Definition 1)}
+      \end{aligned}
+      $$
+    - Since, we gave explicit cases for $0$ and $1$ on $n$, the inductive step will be $Q(1+n) → Q(2+n)$. These statements need therefore be true:
+
+      $$
+      \begin{aligned}
+      P(0) \hspace{1.8cm} \\
+      P(1) → P(2) \\
+      P(2) → P(3) \\
+      P(3) → \ ... \hspace{0.4cm}
+      \end{aligned}
+      $$
+      
+      We are given $𝑃(1+𝑚,1+𝑛)$ and need to prove $𝑃(1+𝑚,2+𝑛)$. This is case 4 above, since we already have that $∀𝑛.𝑃(𝑚,𝑛)$.
+
+      $$
+      \begin{aligned}
+      A^r(1+m,2+n) &= A^r(m,A^r(1+m,1+n)) \\
+      &= 2 \uparrow^m (2 \uparrow^{m+1} n+1) && \text{  (I.H 1 and 2)} \\
+      &= 2 \uparrow^m \underbrace{(2 \uparrow^{m} 2 \uparrow^{m} 2 .. \uparrow^{m} 2)}_{n+1 \text{ copies}} && \text{(Definition 1)} \\
+      &= 2 \uparrow^{m+1} n+2
+      \end{aligned}
+      $$
+
+
+      
+
+$\therefore$ By the principle of induction, our claim holds for all $m,n \geq 0$. $\hspace{5cm} \blacksquare$
 
 And we're done.
 
@@ -519,6 +636,7 @@ And we're done.
 - [Mathematics and Computer Science: Coping with Finiteness](http://www.sciacchitano.it/Spazio/Coping%20with%20Finiteness.pdf)
 - [Pointless Large Number Stuff: Knuth's up-arrow](https://sites.google.com/site/pointlesslargenumberstuff/home/2/uparrows)
 - [Wait But Why: From 1,000,000 to Graham’s Number](https://waitbutwhy.com/2014/11/1000000-grahams-number.html)
+- [LaTeX Theorem-like Environments for the Web](https://drz.ac/2013/01/17/latex-theorem-like-environments-for-the-web/)
 
 
 ## Comments
