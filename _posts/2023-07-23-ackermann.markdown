@@ -2,7 +2,7 @@
 layout: post
 title:  "SICP, Ackermann functions and Really Large Numbers"
 date:   2023-07-23 17:56:57 +0100
-tags: sicp
+tags: sicp scheme large-numbers proof induction recursion tetration
 usemathjax: true
 ---
 
@@ -61,7 +61,7 @@ Functions, called _procedures_ in Scheme, are an abstraction technique by which 
 25
 ```
 
-Control flow is described in Scheme using the `cond` or `if` where the former allows for an _n-ary_ case analysis.
+Control flow is described in Scheme using the `cond` or `if` procedures where the former allows for an n-<i>ary</i> case analysis.
 
 ```lisp
 (define (abs x)
@@ -94,7 +94,7 @@ Before we start writing down the math, let us add MathJax support to our static 
 ![](/img/ex1.10.png){:width="500"}
 {: refdef}
 
-We will use the _substitution model_ to evaluate $ (A \ x \ y) $ at the given parameters.
+We will use the _substitution model_ of evaluation to expand $ (A \ x \ y) $ at the given parameters.
 
 _`(A 1 10)`_
 ```lisp
@@ -119,9 +119,9 @@ _`(A 1 10)`_
 1024
 ```
 
-We observe that the multiplications operations which reduce the chain of function compositions to our answer is _deferred_ and the max length of this chain can be pre-determined using the parameters (input size). Such a function is called a _primtive recursive_ function. Computability theorists care about this quality of functions.
+We observe that the multiplications operations, which reduce the chain of function compositions to our answer, is _deferred_ and the max length of this chain can be pre-determined using the parameters (input size). Such a function is called a _primitive recursive_ function. Computability theorists care about this quality of functions.
 
-We also observe from the behaviour of this function instance that Ackerman functions of the form $(A \ 1 \ n)$ can be represented using the closed-form expression $2^n$. Thereby, we now know $ g(n) $ as well.
+We also observe from the behaviour of this function instance that Ackermann functions of the form $(A \ 1 \ n)$ can be represented using the closed-form expression $2^n$. Thereby, we now know $ g(n) $ as well. The proof for this is straightforward using induction -  we will skip writing that.
 
 _`(A 2 4)`_
 ```lisp
@@ -130,7 +130,7 @@ _`(A 2 4)`_
 (A 1 (A 1 (A 1 (A 2 1))))
 (A 1 (A 1 (A 1 2)))
 ```
-We could stop here and use g(n) to write this expression as $ g(g(g(2))) $. Looking at the number of compositions of $g(n)$ should give you a clue about finding a closed-form for $h(n)$ but let us continue.
+We could stop here and use $g(n)$ to write this expression as $ g(g(g(2))) $. Looking at the number of compositions of $g(n)$ should give you a clue about finding a closed-form for $h(n)$ but let us continue.
 
 ```lisp
 (A 1 (A 1 (A 0 (A 1 1))))
@@ -166,7 +166,9 @@ _`(A 3 3)`_
 (A 2 4)
 ```
 
-For the second half of the question, we already know that $g(n) = 2^n$ for $n>0$ and $f(n) = 2n$ is obvious. We solve for $h(n)$. 
+We can stop there.
+
+For the second half of the question, we already know that $g(n) = 2^n$ for $n>0$ and $f(n) = 2n$ for $n>0$  is obvious. We solve for $h(n)$.
 
 **Note that we're now writing Scheme notation using TeX typesetting. Recall that $(A \ x \ y)$ means initiating the procedure `A` with arguments `x` and `y`.**
 
@@ -182,14 +184,14 @@ h(n) &= (A \ 2 \ n) \\
 $$
 
 
-By representing $k$ function compositions of $g(x)$ using $\ g^k(x)$, we have all three functions in mathematical notation,
+By representing $k$ function compositions of $g(x)$ using $\ g^k(x)$, we have all three functions in mathematical notation, for $n>0$,
 
 
 $$
 \begin{aligned}
 A(0,n) &= f(n) = 2n \\
-A(1,n) &= g(n) = 2^n \text{ for } n>0 \\ 
-A(2,n) &= h(n) = g^{n-1}(2) = \underbrace{2^{2^{2^{⋰^{2}}}}}_{n \text{ times}} \ \ \text{for } n>0
+A(1,n) &= g(n) = 2^n \\
+A(2,n) &= h(n) = g^{n-1}(2) = \underbrace{2^{2^{2^{⋰^{2}}}}}_{n \text{ times}}
 \end{aligned}
 $$
 
@@ -412,7 +414,7 @@ The second number is 2 to the power of 2003529930...............5719156736 and i
 
 To put the second number into perspective, the number of Planck volumes (cubic Planck lengths) in the observable universe is around $4.65 \times 10^{185}$.
 
-Let us see where larger values of $x$ and $y$ will take us. We are now done with our exercise and entering the territory of really large numbers...
+Let us see where bigger input values will take us! We are now done with our exercise and entering the territory of really large numbers...
 
 ## Knuth's up-arrows
 Consider $A(3, n)$. We can derive a mathematical definition in the same way as we previously did.
@@ -444,7 +446,7 @@ $$
 \end{aligned}
 $$
 
-$A(3,4)$ is a power tower of 65,536 two's! You can see how drastic and jumpy the growth rate is for these functions. We can try to represent $A(3,n)$ as follows,
+That is a power tower of 65,536 two's! You can see how drastic and jumpy the growth rate is for these functions. We can try to represent $A(3,n)$ as follows,
 
 $$
 \begin{aligned}
@@ -502,9 +504,9 @@ For a quick sanity check, let us calculate $A(3,4)$ as before.
 $$
 \begin{aligned}
 A(3,4) &= 2 \uparrow \uparrow \uparrow 4 \\
-&= 2 \uparrow \uparrow (2 \uparrow \uparrow (2 \uparrow \uparrow 2)) \\
+&= 2 \uparrow \uparrow (2 \uparrow \uparrow (2 \uparrow \uparrow 2)) && \text{ (Definition 1)} \\
 &= 2 \uparrow \uparrow (2 \uparrow \uparrow 4) \\
-&= 2 \uparrow \uparrow (2 \uparrow (2 \uparrow (2 \uparrow 2))) \\
+&= 2 \uparrow \uparrow (2 \uparrow (2 \uparrow (2 \uparrow 2))) && \text{ (Definition 1)} \\
 &= 2 \uparrow \uparrow 65536 \\
 &= \underbrace{2 \uparrow 2 \uparrow \cdots \uparrow 2}_{65536 \text{ copies of 2}}
 \end{aligned}
@@ -512,7 +514,7 @@ $$
 
 Just as before, we have a power tower of two's with length 65536.
 
-Can we now find a closed-form function for the general case $A(m, n)$ where m and n are non-negative integers?
+Can we now find a closed-form function for the general case $A(m, n)$ where $m,n∈ℕ$?
 
 ## Closed-form of the Ackermann function
 
@@ -555,7 +557,7 @@ A(m, n) =
 \end{cases}
 $$
 
-where $\uparrow^m$ represents $m$ up-arrow ops.
+for all integers $m\geq 0, n\geq 0$ and $\uparrow^m$ represents $m$ up-arrow ops.
 
 <div class="proof"> </div>
 Let us first rewrite the recursive defintion of $A$ from Ex.1.10 (which we will denote now by $A^r$) using mathematical function notation.
@@ -570,14 +572,16 @@ A\big(m-1,A(m,n-1)\big)&\text{if }m\ge1\text{ and }n\ge2.
 \end{cases}
 $$
 
-Generally speaking, to prove something like this, it's natural for the structure of the induction to mirror the structure of the recursive definition (since in some ways, they are one and the same). So, for our case, we want an induction method based on cases:
+Generally speaking, to prove something like this, it's natural for the structure of the induction to mirror the structure of the recursive definition (since in some ways, they are one and the same). So, for our case, we want an induction method based on these cases:
 
 1. $∀n. P(0,n)$
 2. $∀m. P(1+m,0)$
 3. $∀m. P(1+m,1)$
 4. $∀m(∀n. P(m,n)) ∧ ∀n. P(1+m,1+n) → P(1+m,2+n)$
 
-And this isn't too difficult to derive from the normal principle of induction. To prove $∀m∀ n. P(m,n)$ where $m, n \geq 0$:
+Explain fourth case.....
+
+And this isn't too difficult to derive from the normal principle of induction. To prove $∀m∀ n. P(m,n)$ where $m, n \geq 0$ and $𝑃(𝑚,𝑛)≡𝐴(𝑚,𝑛)$:
 - First induct on $𝑚$
   - Case 1 above covers the base case for this, when $𝑚=0$.
 
@@ -601,14 +605,15 @@ And this isn't too difficult to derive from the normal principle of induction. T
       A^r(1+m,1) = 2 = 2 \uparrow^{1+m} 1 = 2  && \text{ (Definition 1)}
       \end{aligned}
       $$
-    - Since, we gave explicit cases for $0$ and $1$ on $n$, the inductive step will be $Q(1+n) → Q(2+n)$. These statements need therefore be true:
+    - Since, we gave explicit cases for $0$ and $1$ on $n$, the inductive step will be of the form $Q(1+n) → Q(2+n)$. These statements need therefore be true, for $n\geq0$:
 
       $$
       \begin{aligned}
-      P(0) \hspace{1.8cm} \\
-      P(1) → P(2) \\
-      P(2) → P(3) \\
-      P(3) → \ ... \hspace{0.4cm}
+      P(1+m,0) \hspace{1.8cm} \\
+      P(1+m,1) → P(1+m,2) \\
+      P(1+m,2) → P(1+m,3) \\
+      ...\hspace{3cm} \\
+      P(1+m,1+n) → P(1+m,2+n)  
       \end{aligned}
       $$
       
@@ -617,9 +622,10 @@ And this isn't too difficult to derive from the normal principle of induction. T
       $$
       \begin{aligned}
       A^r(1+m,2+n) &= A^r(m,A^r(1+m,1+n)) \\
-      &= 2 \uparrow^m (2 \uparrow^{m+1} n+1) && \text{  (I.H 1 and 2)} \\
+      &= 2 \uparrow^m (2 \uparrow^{m+1} n+1) && \text{  (induction hypotheses)} \\
       &= 2 \uparrow^m \underbrace{(2 \uparrow^{m} 2 \uparrow^{m} 2 .. \uparrow^{m} 2)}_{n+1 \text{ copies}} && \text{(Definition 1)} \\
-      &= 2 \uparrow^{m+1} n+2
+      &= 2 \uparrow^{m+1} n+2 \\
+      &= \text{RHS of } A(1+m, 2+n)
       \end{aligned}
       $$
 
@@ -636,7 +642,5 @@ And we're done.
 - [Mathematics and Computer Science: Coping with Finiteness](http://www.sciacchitano.it/Spazio/Coping%20with%20Finiteness.pdf)
 - [Pointless Large Number Stuff: Knuth's up-arrow](https://sites.google.com/site/pointlesslargenumberstuff/home/2/uparrows)
 - [Wait But Why: From 1,000,000 to Graham’s Number](https://waitbutwhy.com/2014/11/1000000-grahams-number.html)
-- [LaTeX Theorem-like Environments for the Web](https://drz.ac/2013/01/17/latex-theorem-like-environments-for-the-web/)
-
 
 ## Comments
