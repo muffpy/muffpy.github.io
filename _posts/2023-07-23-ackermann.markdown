@@ -555,10 +555,10 @@ A(m, n) =
 \end{cases}
 $$
 
-where $\uparrow^m$ represents $m$ up-arrow ops. This is easily proven by straightforward induction.
+where $\uparrow^m$ represents $m$ up-arrow ops.
 
 <div class="proof"> </div>
-Let us first rewrite the recursive defintion of $A$ (which we will denote now by $A^r$) using mathematical function notation.
+Let us first rewrite the recursive defintion of $A$ from Ex.1.10 (which we will denote now by $A^r$) using mathematical function notation.
 
 $$
 A^r(m,n)=
