@@ -89,11 +89,12 @@ And that's all we need to tackle Exercise 1.10 which is given below.
 ## Exercise 1.10
 Before we start writing down the math, let us add MathJax support to our static site generator Jekyll using Vincent Zhang's [tutorial](http://webdocs.cs.ualberta.ca/~zichen2/blog/coding/setup/2019/02/17/how-to-add-mathjax-support-to-jekyll.html). MathJax is JavaScript library that scans the page for mathematical markup, and typesets the mathematical information accordingly. All we need to do is add the public CDN `<script>` tags to our base `head.html`. Note that the resource identifier should use HTTPS in the `<script>` tag.
 
-<br><br>
-{:refdef: style="text-align: center;"}
-![](/img/ex1.10.png){:width="500"}
-{: refdef}
+<br>
+<img src="/img/ex1.10.png"
+     style="margin: 0 auto; width: 500px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">Exercise 1.10 (SICP; Page 47)</figcaption>
 
+<br>
 We will use the _substitution model_ of evaluation to expand $ (A \ x \ y) $ at the given parameters.
 
 _`(A 1 10)`_
@@ -520,6 +521,18 @@ Can we now find a closed-form function for the general case $A(m, n)$ where $m,n
 
 Yes, we can.
 
+Let us first rewrite the recursive defintion of $A$ from Ex.1.10 (which we will denote now by $A^r$) using mathematical function notation.
+
+$$
+A^r(m,n)=
+\begin{cases}
+2n&\text{if }m=0\\
+0&\text{if }m\ge1\text{ and }n=0\\
+2&\text{if }m\ge1\text{ and }n=1\\
+A\big(m-1,A(m,n-1)\big)&\text{if }m\ge1\text{ and }n\ge2.
+\end{cases}
+$$
+
 We can guess and conjecture from the previous sections the following claim.
 <style>
 .claim {
@@ -546,7 +559,7 @@ We can guess and conjecture from the previous sections the following claim.
     float:right;
 }
 </style>
-**Claim 1.** A closed-form formal definition of the Ackermann function can be written as
+**Claim** A closed-form formal definition of the Ackermann function can be written as
 
 $$
 A(m, n) = 
@@ -560,28 +573,61 @@ $$
 for all integers $m\geq 0, n\geq 0$ and $\uparrow^m$ represents $m$ up-arrow ops.
 
 <div class="proof"> </div>
-Let us first rewrite the recursive defintion of $A$ from Ex.1.10 (which we will denote now by $A^r$) using mathematical function notation.
-
-$$
-A^r(m,n)=
-\begin{cases}
-2n&\text{if }m=0\\
-0&\text{if }m\ge1\text{ and }n=0\\
-2&\text{if }m\ge1\text{ and }n=1\\
-A\big(m-1,A(m,n-1)\big)&\text{if }m\ge1\text{ and }n\ge2.
-\end{cases}
-$$
-
-Generally speaking, to prove something like this, it's natural for the structure of the induction to mirror the structure of the recursive definition (since in some ways, they are one and the same). So, for our case, we want an induction method based on these cases:
+Generally speaking, to prove something like this, it's natural for the structure of the induction to mirror the structure of the recursive definition (since in some ways, they are one and the same). So, for our function, we want an induction method based on the cases below. Note that $𝑃(𝑚,𝑛)≡𝐴(𝑚,𝑛)$.
 
 1. $∀n. P(0,n)$
 2. $∀m. P(1+m,0)$
 3. $∀m. P(1+m,1)$
-4. $∀m(∀n. P(m,n)) ∧ ∀n. P(1+m,1+n) → P(1+m,2+n)$
+4. $∀m(∀n. P(m,n)) → ∀n. P(1+m,1+n) → P(1+m,2+n)$
 
-Explain fourth case.....
+The fourth case is not very obvious at first but it is justifiable. In order to solve $P(1+m,2+n)$, we need $A(1+m,2+n) = A(m, A(1+m,1+n))$. To rewrite the inner $A$, $P(1+m,1+n)$ is sufficient, and $∀k. P(m,k)$ to rewrite the outer $A$. These are the two premises required to reach the consequent.
 
-And this isn't too difficult to derive from the normal principle of induction. To prove $∀m∀ n. P(m,n)$ where $m, n \geq 0$ and $𝑃(𝑚,𝑛)≡𝐴(𝑚,𝑛)$:
+Our claim isn't too difficult to derive from two-dimensional _lexicographic induction_. 
+
+**Theorem 1. (Lexicographic Induction)**
+Let $S(m,n)$ denote a statement involving two variables, $m$ and $n$ that belong to the set $U$. Suppose
+- $S(0,n)$ is true for all $n = 1, 2, 3,...$
+- if $S(m,n)$ is true for all $n$, then $S(m+1,n)$ is true for all $n$
+  - $S(m+1,0)$ is true
+  - if $S(m+1,n)$ is true, then $S(m+1,n+1)$ is true
+
+Then, $S(m,n)$ is true for all positive numbers $m$ and $n$.
+
+This theorem is illustrated using the tables below. Each green cell in the tables represents pairs of $(m,n) \in U$ for which $S(m,n)$ holds.
+
+First, we have the base case $∀n. S(0,n)$.
+
+<br>
+<img src="/img/base_case_m.jpg"
+     style="margin: 0 auto; width: 400px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">$∀n. S(0,n)$</figcaption>
+<br>
+
+We induct on $m$ where if the column $m$ is shaded green, then so is the column $m+1$.
+
+<br>
+<img src="/img/m_to_m+1_induction.jpg"
+     style="margin: 0 auto; width: 400px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">$∀n. S(m,n) → S(m+1,n)$</figcaption>
+<br>
+
+But how do we prove the right side of this implication? We induct on $n$ where if some cell in column $m+1$ is shaded green, then so is the next one. If our base case is $(m+1,0)$, then the whole column is shaded green.
+
+<br>
+<img src="/img/n_to_n+1_induction.jpg"
+     style="margin: 0 auto; width: 400px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">$S(m+1,n) → S(m+1,n+1)$</figcaption>
+<br>
+
+And combining these nested inductions we have
+
+<br>
+<img src="/img/lexicographic_induction.jpg"
+     style="margin: 0 auto; width: 400px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">$∀m∀n. S(m,n)$</figcaption>
+<br>
+
+To prove $∀m∀n. P(m,n)$ where $m, n \geq 0$:
 - First induct on $𝑚$
   - Case 1 above covers the base case for this, when $𝑚=0$.
 
