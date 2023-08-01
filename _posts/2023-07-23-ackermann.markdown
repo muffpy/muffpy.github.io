@@ -92,7 +92,7 @@ Before we start writing down the math, let us add MathJax support to our static 
 <br>
 <img src="/img/ex1.10.png"
      style="margin: 0 auto; width: 500px; display: block;" />
-<figcaption style="text-align: center; font-style: italic;">Exercise 1.10 (SICP; Page 47)</figcaption>
+<figcaption style="text-align: center; font-style: italic;">Exercise 1.10 (SICP; page 47)</figcaption>
 
 <br>
 We will use the _substitution model_ of evaluation to expand $ (A \ x \ y) $ at the given parameters.
@@ -529,7 +529,7 @@ A^r(m,n)=
 2n&\text{if }m=0\\
 0&\text{if }m\ge1\text{ and }n=0\\
 2&\text{if }m\ge1\text{ and }n=1\\
-A\big(m-1,A(m,n-1)\big)&\text{if }m\ge1\text{ and }n\ge2.
+A^r\big(m-1,A^r(m,n-1)\big)&\text{if }m\ge1\text{ and }n\ge2.
 \end{cases}
 $$
 
@@ -585,8 +585,8 @@ The fourth case is not very obvious at first but it is justifiable. In order to 
 Our claim isn't too difficult to derive from two-dimensional _lexicographic induction_. 
 
 **Theorem 1. (Lexicographic Induction)**
-Let $S(m,n)$ denote a statement involving two variables, $m$ and $n$ that belong to the set $U$. Suppose
-- $S(0,n)$ is true for all $n = 1, 2, 3,...$
+Let $S(m,n)$ denote a statement involving two variables, $m$ and $n$ that belong to the set $U⊆(ℕ,ℕ)$. Suppose
+- $S(0,n)$ is true for all $n = 0, 1, 2, 3,...$
 - if $S(m,n)$ is true for all $n$, then $S(m+1,n)$ is true for all $n$
   - $S(m+1,0)$ is true
   - if $S(m+1,n)$ is true, then $S(m+1,n+1)$ is true
@@ -603,7 +603,7 @@ First, we have the base case $∀n. S(0,n)$.
 <figcaption style="text-align: center; font-style: italic;">$∀n. S(0,n)$</figcaption>
 <br>
 
-We induct on $m$ where if the column $m$ is shaded green, then so is the column $m+1$.
+We induct on $m$ where if a column $m$ is shaded green, then so is the column $m+1$.
 
 <br>
 <img src="/img/m_to_m+1_induction.jpg"
@@ -611,7 +611,7 @@ We induct on $m$ where if the column $m$ is shaded green, then so is the column 
 <figcaption style="text-align: center; font-style: italic;">$∀n. S(m,n) → S(m+1,n)$</figcaption>
 <br>
 
-But how do we prove the right side of this implication? We induct on $n$ where if some cell in column $m+1$ is shaded green, then so is the next one. If our base case is $(m+1,0)$, then the whole column is shaded green.
+But how do we prove the right side of this implication? We induct on $n$ where if some cell in column $m+1$ is shaded green, then so is the next one below it. If our base case is $(m+1,0)$, then the whole column is shaded green.
 
 <br>
 <img src="/img/n_to_n+1_induction.jpg"
@@ -619,7 +619,7 @@ But how do we prove the right side of this implication? We induct on $n$ where i
 <figcaption style="text-align: center; font-style: italic;">$S(m+1,n) → S(m+1,n+1)$</figcaption>
 <br>
 
-And combining these nested inductions we have
+And thus by combining these nested inductions we have every column shaded green.
 
 <br>
 <img src="/img/lexicographic_induction.jpg"
