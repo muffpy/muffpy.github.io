@@ -20,6 +20,7 @@
 
 title: "reflections"
 baseurl: "" # the subpath of your site, e.g. /blog
+permalink: /:title:output_ext
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: muffpy
 
@@ -28,6 +29,7 @@ theme: minima
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jemoji
 
 include:
   - /img/
