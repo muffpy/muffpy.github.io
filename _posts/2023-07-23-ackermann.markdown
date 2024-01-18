@@ -90,7 +90,7 @@ And that's all we need to tackle Exercise 1.10 which is given below.
 Before we start writing down the math, let us add MathJax support to our static site generator Jekyll using Vincent Zhang's [tutorial](http://webdocs.cs.ualberta.ca/~zichen2/blog/coding/setup/2019/02/17/how-to-add-mathjax-support-to-jekyll.html). MathJax is JavaScript library that scans the page for mathematical markup, and typesets the mathematical information accordingly. All we need to do is add the public CDN `<script>` tags to our base `head.html`. Note that the resource identifier should use HTTPS in the `<script>` tag.
 
 <br>
-<img src="/img/ex1.10.png"
+<img src="/img/blog1/ex1.10.png"
      style="margin: 0 auto; width: 500px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Exercise 1.10 (SICP; page 47)</figcaption>
 
@@ -598,7 +598,7 @@ This theorem is illustrated using the tables below. Each green cell in the table
 First, we have the base case $∀n. S(0,n)$.
 
 <br>
-<img src="/img/base_case_m.jpg"
+<img src="/img/blog1/base_case_m.jpg"
      style="margin: 0 auto; width: 400px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">$∀n. S(0,n)$</figcaption>
 <br>
@@ -606,7 +606,7 @@ First, we have the base case $∀n. S(0,n)$.
 We induct on $m$ where if a column $m$ is shaded green, then so is the column $m+1$.
 
 <br>
-<img src="/img/m_to_m+1_induction.jpg"
+<img src="/img/blog1/m_to_m+1_induction.jpg"
      style="margin: 0 auto; width: 400px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">$∀n. S(m,n) → S(m+1,n)$</figcaption>
 <br>
@@ -614,7 +614,7 @@ We induct on $m$ where if a column $m$ is shaded green, then so is the column $m
 But how do we prove the right side of this implication? We induct on $n$ where if some cell in column $m+1$ is shaded green, then so is the next one below it. If our base case is $(m+1,0)$, then the whole column is shaded green.
 
 <br>
-<img src="/img/n_to_n+1_induction.jpg"
+<img src="/img/blog1/n_to_n+1_induction.jpg"
      style="margin: 0 auto; width: 400px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">$S(m+1,n) → S(m+1,n+1)$</figcaption>
 <br>
@@ -622,7 +622,7 @@ But how do we prove the right side of this implication? We induct on $n$ where i
 And thus by combining these nested inductions we have every column shaded green.
 
 <br>
-<img src="/img/lexicographic_induction.jpg"
+<img src="/img/blog1/lexicographic_induction.jpg"
      style="margin: 0 auto; width: 400px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">$∀m∀n. S(m,n)$</figcaption>
 <br>
