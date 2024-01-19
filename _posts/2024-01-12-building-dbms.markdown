@@ -218,10 +218,92 @@ The most interesting thing we can talk about here is `std::move`'ing our input `
 
 More keen observers will also have noticed that I assigned `old_node->Clone()` which is `std::unique_ptr` to `new_node` which is a `std::shared_ptr`. Why is that possible?
 
+Well, the concept behind this is actually quite simple to understand (we won't discuss universal referencing) and it's called **move semantics**. But first, let's recall how and why we use call by reference.
+
+1. We may need to call functions that mutate parameters which return information back to the caller (also called out parameter). These are _non-const references_. 
+2. We have _const references_ which cannot be mutated but also need not be copied to be used inside our function.
+
+Introduced in C++11, move semantics allowed rvalues to become modifiable (become non-const) after being initialised. These are identified using `T&&` and are called rvalue references. What are rvalues? This amazing slide by Nicolai Josuttis makes it clear.
+
+<img src="/img/blog3/value_cats.png"
+     style="margin: 0 auto; width: 500px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">Value categories since C++11</figcaption>
+<br>
+
+- **lvalues** are everything that has a name and string literals
+- **prvalues** are temporaries without name and non-string literals
+
+Since C++11, non-const rvalue references can be declared to bind rvalues. A successful binding implies the caller no longer needs the value and it may be _stolen_. This was mainly to avoid implicit deep copies of temporaries (which are no longer needed after a function call) instead of just using the temporary's data.
+
+```cpp
+template<typename T>
+class Socket 
+{
+public:
+  ...
+  // copy message into buffer
+  void copy_message(const T& message);
+
+  // move message into buffer
+  void move_message(T&& message);
+};
+
+int main(){
+  Socket<std::string> s1;
+  std::string m = getMessage();  
+  ...
+
+  s1.copy_message(m); // copy m into s1
+  s1.move_message(getMessage()); // move temporary into s1
+  s1.move_message(m+m); // move temporary into cell
+  ...
+
+```
+
+`move_message` binds the temporaries `getMessage()` and `m+m`, so they are never copied from but only the memory used by them is stolen.
+
+Now, we can also do the same thing with the lvalue `m` as follows.
+
+```cpp
+...
+#include <utility>
+s1.move_message(std::move(m)); // move m into s1
+```
+`std::move(x)` basically means "I am not going to use `x` anymore" and the resources of x are free to be moved. It returns an rvalue reference which binds with `move_message`, also known as,
+
+- **xvalues** are (mostly) returned rvalue references created by `std::move`.
+
+This operation leaves with original lvalue in a valid but unspecified state. It can be reused if you want to, for example, if we're reading from a file,
+```cpp
+// read line-by-line from standard input and store in client socket buffer
+Socket<std::string> s2;
+std::string line;
+while (std::getline(std::cin, line)){ // read next line from stdin
+  s2.move_message(std::move(line)); // move it to buffer inside socket
+}
+```
+
+Finally, we circle back to call by reference and look at the convention enforced by the compiler of functions overloading different value categories. 
+
+<img src="/img/blog3/overloading.png"
+     style="margin: 0 auto; width: 500px; display: block;" />
+<figcaption style="text-align: center; font-style: italic;">Overloading on References</figcaption>
+<br>
+
+Some interesting observations we can make is that `Type&` only binds modifiable lvalues and non-modifiable lvalues are only bound to `const Type&`. Secondly, if rvalues fail to bind with `Type&&`, then they call fall back to `const Type&` which implements a copy constructor.
+
+Getting back to our initial questions which led us here, we have answered our first question comprehensively. The second question about assinging an rvalue of type `std::unique_ptr` to `std::shared_ptr` is cleared from this simple block of code in [cppreference](https://en.cppreference.com/w/cpp/memory/shared_ptr/shared_ptr).
+
+```cpp
+template< class Y, class Deleter >
+shared_ptr( std::unique_ptr<Y, Deleter>&& r );
+```
+This move constructor, which accepts an rvalue reference, creates a `std::shared_ptr` which manages the object currently managed by `r`. 
+
 #### Delete(key)
 **_Delete the value for the key. This method returns a new trie._**
 
-This isn't straightforward and requires a bit of thought. The main beef is with a chain of empty nodes attached to an empty leaf (terminal) node. We need to delete all of these in the new trie. How do we decide the node below which the cut needs to happen? Let's call this `cut_node` which must satisfy either of these properties:
+This isn't straightforward and requires a bit of thought. Our main beef is with a chain of empty nodes attached to an empty leaf (terminal) node. We need to delete all of these in the new trie. How do we decide the node below which the cut needs to happen? Let's call this `cut_node` which must satisfy either of these properties:
 - `cut_node` must contain a value and can have any number of children, or,
 - `cut_node` must be empty and have more than one child
 
@@ -253,6 +335,9 @@ and we're done.
 
 ### 🚧🔨
 
+### Learnings
+
+
 ## Buffer Pool Manager
 ### 🚧🔨
 
@@ -260,3 +345,5 @@ and we're done.
 1. Copy-on-write with data blocks mapped using inodes - John Kubiatowicz, CS162 UCB Spring 2023
 2. Operations do not directly modify the nodes of the original trie - Andy Pavlo, CMU 15-445
 4. VTable layout (under the Itanium C++ ABI) - Leonard Chan, Fuschia
+5. Value categories since C++11 - Nicolai Josuttis, Universal/Forwarding References, Meeting C++ 2022
+6. Overloading on references - Nicolai Josuttis, Universal/Forwarding References, Meeting C++ 2022
