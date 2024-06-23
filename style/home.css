@@ -1,0 +1,240 @@
+body {background-position:top left;background-attachment:fixed;
+    background-repeat:no-repeat; margin: 3em 0; font-family:'Gentium Book Basic';
+    line-height:1.5;font-size:1.125rem;font-weight:400;}
+
+#name {margin-bottom:0em;}
+#email {text-align:center;color:#000;position:relative;top:-1.5em;line-height:1;}
+#split {display:inline-block;position:relative;top:1em;text-align:left;}
+#atsign {color:#1079ac;font-weight:bold;}
+
+#container{color:#000;background-color:#FFF;margin:auto;max-width:650px;}
+
+#information {text-align:center; line-height: 2em;}
+#information a {text-decoration:none;}
+#information a:hover {text-decoration:underline;}
+
+h1{color:#1079ac;font-weight:normal;
+text-align:center; font-size:4.5rem;}
+h1 a {color:inherit;text-decoration:inherit;}
+
+table {border-collapse: collapse; margin: auto;}
+thead tr th {border-bottom: 1px solid #CCC;}
+tbody th {text-align:right; padding-right:2em;}
+.blurb td, th { padding-top:2em; padding-bottom: 2em; vertical-align:top; }
+.blurb th {padding-right:2rem}
+
+h2{font-weight:normal;margin:1.4em 0 0.2em; color:#1079ac;font-size:2rem;}
+
+h3{font-weight:normal;margin-bottom:0.2em;text-decoration:underline}
+
+.abstract{padding-right:1em;}
+
+#content .full {padding-left: 2em}
+#content .cb {padding-left: 25%; margin-top: -3.4em;}
+#content h2 {padding-left: 0; border-bottom:none; text-align:right; padding-right:80%;}
+#content li {margin-top:1em;}
+#content table {margin-left:2em;}
+#content h3 {color:#000; font-weight:normal; }
+
+a img{border:0;}
+
+#phdometer {text-align:center; margin-top:2em;}
+#phdometer .meter { font-size: 5em; color:#888; }
+
+#projects {width:100%;}
+#projects td {padding:0.15em 0;}
+#projects th {font-weight:normal; width:8em; line-height:1.1; text-align:right; vertical-align:top; padding:0.3em 1.2em 0 0;}
+
+.extra {font-size:0.8em; color:#888; margin-left:2em;}
+.extra a {text-decoration:none;color:#88E;}
+.extra a:hover {text-decoration:underline;}
+
+#projects .otherlinks td {padding-top:1em; text-align:center; text-align:center;color:#888;}
+#projects .otherlinks a {text-decoration:none;color:#88E;}
+#projects .otherlinks a:hover {text-decoration:underline;}
+
+ul.compact {margin:1em auto 1em; padding:0; text-align:center; font-size:80%; width:80%;}
+ul.compact li {list-style-type:none; margin:0; padding:0 0.5em; display:inline;}
+
+#working { text-align:left; color:#1079ac; }
+
+.wip {color:#999;}
+
+.papers {}
+.papers li {}
+
+li {margin-top:0.7em;list-style-type:square;}
+
+#footer{background:#F6F6F6;border-top:1px solid #ACADAE;padding:0.3em;
+font-size:10pt;color:#626366;}
+#footer-poweredBy {float:right;}
+#footer-lastUpdate {}
+
+.clear{clear:both;}
+.final {text-align:center;font-size:10pt;font-weight:bold;}
+.final  img {border:1px solid #CCC;}
+.float{float:right;clear:right;margin-left:1em;margin-bottom:1em;border:1px solid #CCC;}
+.twp {border:2px solid #000;padding:2px;}
+.twp img {background-color:#000;border:2px solid #000;}
+
+/* Career Path */
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.timespan {
+    grid-column: span 2;
+    font-size: 14px;
+    text-align: right;
+    padding-right: 5px;
+    color: #bbb;
+}
+
+.ico {
+    grid-column: span 2;
+    vertical-align: top;
+    border-left: 2px solid #cfcfcf;
+    position: relative;
+}
+.ico img {
+    border-radius: 5px;
+    width: 100%;
+    max-width: 90px;
+    margin-left: 10px;
+}
+.desc {
+    grid-column: span 8;
+    vertical-align: top;
+    font-size: 17px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.entry-dot {
+    position: absolute;
+    top: 0px;
+    left: -8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 7px;
+    background-color: #cfcfcf;
+    border: 2px solid white;
+}
+
+.hassets {
+    position: relative;
+}
+@media (max-width: 991px) {
+    .hassets {
+        display: none;
+    }
+}
+.hasset {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+.ctitle {
+    font-size: 36px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+#featured-talks .row {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    padding-bottom: 30px;
+}
+.card {
+    grid-column: span 3;
+    vertical-align: top;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white;
+    padding-bottom: 10px;
+}
+@media (max-width: 991px) {
+    .card {
+        grid-column: span 6;
+    }
+    #featured-talks .row {
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
+    }
+}
+.card img {
+    border-radius: 5px;
+    width: 100%;
+}
+.cdesc {
+    height: 30px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+@media (max-width: 768px) {
+    .cdesc {
+        font-size: 14px;
+        padding-bottom: 10px;
+    }
+}
+#pet-projects .row {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+.project {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.pico {
+    float: left;
+    margin-right: 10px;
+}
+.pdesc {
+}
+.pend {
+    clear: both;
+}
+.pico img {
+    height: 80px;
+    border-radius: 5px;
+    border: 1px solid #999;
+}
+.pub {
+    font-size: 14px;
+    border-left: 4px solid #aaa;
+    padding: 2px 0px 2px 10px;
+    margin-bottom: 10px;
+}
+.pub-title {
+    display: inline;
+    color: #333;
+}
+.pub-venue {
+    display: inline;
+    color: #090;
+}
+.pub-authors {
+    display: block;
+    color: #900;
+}
+.tul {
+    text-align: center;
+    padding: 0;
+}
+.til {
+    display: inline-block;
+    padding: 3px 15px 3px 15px;
+    margin-bottom: 5px;
+}
+.tilb {
+    border-right: 1px solid #ccc;
+}
+.nodot {
+    list-style-type: none;
+    padding-left: 0;
+}
