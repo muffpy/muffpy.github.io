@@ -18,11 +18,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "reflections"
-baseurl: "" # the subpath of your site, e.g. /blog
-permalink: /:title:output_ext
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+title: "rahul's blog"
+baseurl: "" # Remove the /blog subpath
+url: "https://muffpy.github.io" # Add your GitHub Pages URL
 github_username: muffpy
+
+# Blog settings
+permalink: /blog/:title:output_ext
 
 # Build settings
 theme: minima
@@ -32,7 +34,17 @@ plugins:
   - jemoji
 
 include:
-  - /img/
+  - img/
+  - style/
+
+# New settings for your portfolio
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: /blog/:title:output_ext
 
 # Exclude from processing.
 # The following items will not be processed, by default.
