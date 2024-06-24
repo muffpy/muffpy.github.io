@@ -25,22 +25,6 @@ tbody th {text-align:right; padding-right:2em;}
 
 h2{font-weight:normal;margin:1.4em 0 0.2em; color:#1079ac;font-size:2rem;}
 
-h3{font-weight:normal;margin-bottom:0.2em;text-decoration:underline}
-
-.abstract{padding-right:1em;}
-
-#content .full {padding-left: 2em}
-#content .cb {padding-left: 25%; margin-top: -3.4em;}
-#content h2 {padding-left: 0; border-bottom:none; text-align:right; padding-right:80%;}
-#content li {margin-top:1em;}
-#content table {margin-left:2em;}
-#content h3 {color:#000; font-weight:normal; }
-
-a img{border:0;}
-
-#phdometer {text-align:center; margin-top:2em;}
-#phdometer .meter { font-size: 5em; color:#888; }
-
 #projects {width:100%;}
 #projects td {padding:0.15em 0;}
 #projects th {font-weight:normal; width:8em; line-height:1.1; text-align:right; vertical-align:top; padding:0.3em 1.2em 0 0;}
@@ -63,7 +47,7 @@ ul.compact li {list-style-type:none; margin:0; padding:0 0.5em; display:inline;}
 .papers {}
 .papers li {}
 
-li {margin-top:0.7em;list-style-type:square;}
+ul {padding-left: 30px; padding-top;}
 
 #footer{background:#F6F6F6;border-top:1px solid #ACADAE;padding:0.3em;
 font-size:10pt;color:#626366;}
