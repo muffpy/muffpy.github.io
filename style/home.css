@@ -47,7 +47,7 @@ ul.compact li {list-style-type:none; margin:0; padding:0 0.5em; display:inline;}
 .papers {}
 .papers li {}
 
-ul {padding-left: 30px; padding-top;}
+ul {padding-left: 30px; }
 
 #footer{background:#F6F6F6;border-top:1px solid #ACADAE;padding:0.3em;
 font-size:10pt;color:#626366;}
