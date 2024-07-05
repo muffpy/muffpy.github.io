@@ -1,33 +1,57 @@
 ---
 layout: post
-title:  "Building a DBMS from BusTub [🚧]"
+title:  "C++ Primer"
 date:   2024-01-12 17:56:57 +0100
 tags: databases dbms c++
 usemathjax: true
 ---
 
-BusTub is a pedagogical relational database management system (RDBMS) built at Carnegie Mellon University for the 15-445/645 course on database systems. BusTub is written in C++. I thought finishing the assignments for this course taught by Andy Pavlo (who open-sourced the [lectures](https://www.youtube.com/@CMUDatabaseGroup) ❤️) would be a great little part-time project for the weekends.
+A standout project in Andy Pavlo's 15-445/645 [course](https://www.youtube.com/@CMUDatabaseGroup) on database systems is Project 0: C++ Primer which asseses your knowledge of basic C++ features like:
 
-We will be adding the following features to BusTub (and in that order).
-- concurrent key-value store backed by Copy-on-write trie ✅
-- disk-oriented storage manager
-    - disk scheduler
-    - buffer pool manager
-- disk-backed hash index
-- query executors
-- optimistic multi-version concurrency control (MVOCC)
+- references
+- std::move
+- templated functions and classes
+- smart pointers
+- locks
+- STL containers (std::set, std::vector, std::unordered_map)
 
- 🚧🔨🚨**_THIS BLOG IS A WORK-IN-PROGRESS_** 🚧🔨🚨
+If you're brushing up on your C++ skills then completing this project is an excellent goal. Make sure to get into the habit of referring to the C++ language standards and style while writing your code:
 
-It  will keep getting updated as I find time to add all these features and end up with a running DBMS.
+- [https://en.cppreference.com/w/](https://en.cppreference.com/w/)
+- [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
 
+This project builds a concurrent key-value store backed by a copy-on-write trie. You can find the starting code in the [BusTub](https://github.com/cmu-db/bustub) repository created for this course (we will only be dealing with Project 0).
+
+```shell
+$ git clone https://github.com/cmu-db/bustub.git
+$ cd bustub
+# macOS
+$ build_support/packages.sh
+$ mkdir build && cd build
+$ cmake -DCMAKE_BUILD_TYPE=Debug ..
+$ make -j`nproc`
+```
+
+We can test our using the four in-built [GTest](https://github.com/google/googletest) unit test cases.
+
+```shell
+$ cd build
+$ make trie_test trie_store_test -j$(nproc)
+$ make trie_noncopy_test trie_store_noncopy_test -j$(nproc)
+$ ./test/trie_test
+$ ./test/trie_noncopy_test
+...
+```
+
+If you are interested in using `gdb` for debugging, then you might like this presentation by Greg Law.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PorfLSr3DDI?si=DQf9gIHWpAwBJZ_q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
 
 ## Copy-on-write KV store
 **Copy-on-write (COW)** is a common strategy used to resolve concurrency and reliability issues. Essentialy, any update operation to an original, shared resource requires a new, private copy to be made and parts of the original copy which are unchanged are re-used in the private copy. This approach is seen in network file servers like:
 - NetApp’s Write Anywhere File Layout (WAFL)
 - ZFS (Sun/Oracle)
 
-<img src="/img/blog3/cow.png"
+<img src="/assets/posts/2024-01-12-building-dbms/cow.png"
      style="margin: 0 auto; width: 600px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Copy-on-write with data blocks mapped using inodes</figcaption>
 <br>
@@ -43,7 +67,7 @@ Contrast these properties with regular read-write locks that only allows concurr
 
 We will implement COW using an ordered search tree data structure called _trie_ in which keys (commonly variable-length strings) are mapped to values (of any arbitrary type) in nodes.
 
-<img src="/img/blog3/trie_put.svg"
+<img src="/assets/posts/2024-01-12-building-dbms/trie_put.svg"
      style="margin: 0 auto; width: 350px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Operations do not directly modify the nodes of the original trie </figcaption>
 <br>
@@ -156,7 +180,7 @@ That's because C++ adds **run-time type information (RTTI)** to the program imag
 
 Note that RTTI only works with **polymorphic classes**. These are marked using the `virtual` keyword for class methods in C++. Why does it only work with polymorphic classes? Because the generic C++ ABI dictates that it does! The **virtual method table (vtable)** used to support dynamic dispatch in C++ contains the type information necessary to compare pointers.
 
-<img src="/img/blog3/vtable.png"
+<img src="/assets/posts/2024-01-12-building-dbms/vtable.png"
      style="margin: 0 auto; width: 600px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">VTable layout (under the Itanium C++ ABI)</figcaption>
 <br>
@@ -225,7 +249,7 @@ Well, the concept behind this is actually quite simple to understand (we won't d
 
 Introduced in C++11, move semantics allowed rvalues to become modifiable (become non-const) after being initialised. These are identified using `T&&` and are called rvalue references. What are rvalues? This amazing slide by Nicolai Josuttis makes it clear.
 
-<img src="/img/blog3/value_cats.png"
+<img src="/assets/posts/2024-01-12-building-dbms/value_cats.png"
      style="margin: 0 auto; width: 500px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Value categories since C++11</figcaption>
 <br>
@@ -285,7 +309,7 @@ while (std::getline(std::cin, line)){ // read next line from stdin
 
 Finally, we circle back to call by reference and look at the convention enforced by the compiler of functions overloading different value categories. 
 
-<img src="/img/blog3/overloading.png"
+<img src="/assets/posts/2024-01-12-building-dbms/overloading.png"
      style="margin: 0 auto; width: 500px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Overloading on References</figcaption>
 <br>
@@ -307,7 +331,7 @@ This isn't straightforward and requires a bit of thought. Our main beef is with 
 - `cut_node` must contain a value and can have any number of children, or,
 - `cut_node` must be empty and have more than one child
 
-<img src="/img/blog3/delete_key.png"
+<img src="/assets/posts/2024-01-12-building-dbms/delete_key.png"
      style="margin: 0 auto; width: 600px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Classifying cut_node (red) and its child (blue) in two ways. Leaf node (green) represents "some_key" in this trie.</figcaption>
 <br>
@@ -331,15 +355,9 @@ if (node->children.empty()) {  // reached leaf node
 
 and we're done.
 
-### Serving concurrent users  
-
-### 🚧🔨
-
-### Learnings
+### Serving concurrent users 🚧🔨
 
 
-## Buffer Pool Manager
-### 🚧🔨
 
 ## Image credits
 1. Copy-on-write with data blocks mapped using inodes - John Kubiatowicz, CS162 UCB Spring 2023

@@ -41,7 +41,7 @@ This can be expressed in Scheme. <a href="{% link _posts/2023-07-23-ackermann.ma
 
 SICP now asks us some questions about this procedure as seen below.
 
-<img src="/img/blog2/ex1.14.png"
+<img src="/assets/posts/2023-29-21-counting-counting-change/ex1.14.png"
      style="margin: 0 auto; width: 500px; display: block;" />
 <figcaption style="text-align: center; font-style: italic;">Exercise 1.14 (SICP; page 56)</figcaption>
 
