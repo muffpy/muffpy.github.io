@@ -1,0 +1,37 @@
+---
+layout: post
+title:  "The best parts of KCL CS (+ survival tips)"
+date:   2022-06-01 17:56:57 +0100
+tags: review kcl courses
+usemathjax: true
+---
+
+What makes a university module successful?
+
+Bloom's taxonomy from 1956 neatly classifies learning outcomes into six categories according to varying levels of complexity. If we label each level bottom-up, then an instructor who achieves a higher class average outcome at then end of the course can be happy with their course design.
+
+<img src="/assets/posts/2022-06-01-kcl/bloom.png"
+     style="margin: 0 auto; width: 600px; display: block;" />
+
+The instructor's and TA's role is only to bring you to the second level of this hierarchy. Well-designed and well-paced lecture slides and videos go a long way for both learning and exam revision. Some tips for TAs:
+
+- Try and create a safe place of learning. If your students are not comfortable to ask questions, then you need to reevlaute your teaching style. Remember when you had a TA or lecturer who you felt was judging your question instead of answering it, would you ever ask them for help again? Probably not - be kind, patient and encourage your students to participate in discussion.
+
+- If you don't know something, don't be embarrassed, it's okay. Just say you don't know, but I will get back to you. Seek help from the course leader and actually get back to the student!
+
+- Make sure you are prepared for each small group tutorial. Watch the lectures and attempt the tutorial yourself. If you are TA then you likely did really well in this module but learning material may have updated since the last time you took it.
+
+- Pace yourself correctly. Keep an eye on the clock. Preparation helps in this case to make sure your tutorial sheet is mostly complete within a single session but it's okay if it spans two sessions. Learning is important too. Try to look for cues and grasp the environment in the room - are students looking at you blankly and their eyes are glazed over? Then slow down and use a different approach to explain the concept. 
+
+A key method which allows students to shift toward higher-order thinking skills after building a foundational and comprehensional base in a subject is practical labs and assignments. These provide an excellent opportunity to apply concepts to real-world tasks, draw connections among ideas and synthesise original work. This is exactly what makes a module _memorable_ and ✨<span style="color:blue">_fun_</span>✨.
+
+The modules at King's CS which satisfy one or a combination of the above criteria (and I personally enjoyed very much) are:
+- Foundations of Computing (FC2)
+- Operating Systems & Concurrency (OSC)
+- Practical Experiences of Programming (PEP)
+- Programming Language Design Paradigms (PLD)
+- Compilers and Formal Langauges (CFL)
+
+<span style="color:#FF00FF">A WHOPPING FOUR(!!)</span> of these modules are from the second-year of the course. My congratulations to the lecturers and TAs (they will be credited below). My tips and notes for these modules are as follows.
+
+This blog is a work-in-progress 🚧.
