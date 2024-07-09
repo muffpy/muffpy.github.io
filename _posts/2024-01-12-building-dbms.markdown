@@ -15,7 +15,9 @@ A standout project in Andy Pavlo's 15-445/645 [course](https://www.youtube.com/@
 - locks
 - STL containers (std::set, std::vector, std::unordered_map)
 
-If you're brushing up on your C++ skills then completing this project is an excellent goal. Make sure to get into the habit of referring to the C++ language standards and style while writing your code:
+This mandatory project is supposedly a self-evaluation safety mechanism for students on 15-445 to ensure they have enough C++ preparation to finish the course. Therefore, if you're brushing up on your C++ skills then completing this project is an excellent goal. 
+
+Make sure to get into the habit of referring to the core language standards and style while writing your code:
 
 - [https://en.cppreference.com/w/](https://en.cppreference.com/w/)
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
