@@ -1,0 +1,253 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=0.7in,right=0.7in,top=0.7in,bottom=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+\usepackage{array}
+\usepackage{longtable}
+\setlength{\LTpre}{-2pt}
+\setlength{\LTpost}{0pt}
+
+\usepackage{fontawesome5}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=NavyBlue,
+    linkcolor=blue,
+}
+
+\usepackage[dvipsnames]{xcolor}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+% \usepackage[T1]{fontenc}
+% \usepackage{gentium}
+
+% \usepackage{fontspec}
+
+\usepackage{helvet}
+
+\pagenumbering{gobble}
+
+% Adjust the section titles
+\titleformat{\section}{\normalfont\large\bfseries}{}{0em}{}[\titlerule]
+
+\begin{document}
+
+% \noindent
+% \begin{center}
+% \textbf{\LARGE Rahul Ramaka} \\
+% E-mail: \texttt{rahulathreya@yahoo.com} \\
+% Telephone: +44 7763 331895 \\
+% Portfolio: {\texttt{https://muffpy.github.io/}}
+% \end{center}
+
+\noindent
+{\Large\textbf{Rahul Ramaka}} \hfill Last updated: August, 2024
+\noindent\rule{\textwidth}{2pt}\smallskip
+
+\noindent
+\faEnvelope\  \href{mailto:rahulathreya@yahoo.com}{rahulathreya@yahoo.com} \hfill \faGlobe\ \href{https://muffpy.github.io/}{muffpy.github.io}
+
+\noindent
+\faPhone\ +44 7763 331895 \hfill \faGithub\ \href{https://github.com/muffpy}{github.com/muffpy}
+
+\small
+
+\section{Summary}
+Accomplished Full-stack Software Engineer with a First-Class Honours BSc in Computer Science from King's College London. Professional internship experience at Amazon Web Services (AWS), Prime Video Studios, and Snapchat, developing complex, scalable applications including cloud-based microservices, real-time systems, and machine learning systems. Proficient in Python, C++, Java, and JavaScript, with a strong foundation in data structures \& algorithms and systems programming.
+
+\vspace{-3mm}
+
+\section{Skills}
+
+\begingroup
+\renewcommand{\arraystretch}{1.3} % Default value: 1
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Languages & Python, C++20, C, Java, JavaScript, Scala, Go, \LaTeX, Bash \\
+Database & MySQL, PostgreSQL, MongoDB, Elasticsearch \\
+Web & Node.js, Express, TypeScript, Django, HTML, CSS \\
+Tools & Git, Docker, k8s, Make, CMake, perf, gdb/lldb, gRPC, OpenSSL \\
+Systems & AWS, TCP/IP, TensorFlow, PyTorch, GNU/Linux
+
+% \\
+% Soft Skills & Efficiency Management, Teamwork, Communication, Accountability
+% \\
+\end{tabular}
+\endgroup
+
+\vspace{-2mm}
+
+
+% \begin{flushleft}
+% \textbf{Operating system level software:} syscalls, signals, pipes, mmap, locks, page tables, caching, containers (Docker, k8s), distributed computing (gRPC, KVS, AFS, Blockchain)
+% \end{flushleft}
+
+% \begin{flushleft}
+% \textbf{Networking:} socket programming, TCP/IP programming, network adaptors and interfaces
+% \end{flushleft}
+
+\section{Experience}
+
+\begin{longtable}{p{\textwidth}}
+% \textbf{2023-24} & \textbf{Independent Consulting \& Professional Skill Development} \vspace{1pt}
+%        \begin{itemize}[itemsep=-1.5mm,topsep=0pt,partopsep=0pt,leftmargin=5mm]
+%         \item Worked on personal software projects: \hyperref[sec:projects]{lightdb}, \hyperref[sec:projects]{netstackxx}, \hyperref[sec:projects]{libdeep}, \hyperref[sec:projects]{mrgo}.
+%         \item
+%         \item Launched an independent fitness consulting service and acquired client base through referrals and social media marketing.
+%        \end{itemize} \\
+\textbf{PLSV Group, University of Cambridge} \hfill \small{2023-23} \\
+       Research Intern \vspace{1pt}
+       \begin{itemize}[itemsep=-2mm,topsep=0pt,partopsep=0pt,leftmargin=5mm]
+        \item Collaborated on the DIADEM project supported by EPSRC, Arm and Pernosco to improve LLVM compiler-generated debugging metadata coverage.
+        \item \textbf{Informed future research} efforts by showing that the CPU bottleneck in metadata generation is the reflection library, not OS-level congestion or the registers itself.
+
+       \end{itemize} \vspace{2mm}
+\textbf{Amazon Web Services (AWS), Amazon} \hfill \small{2022-22}  \\
+       SDE Intern - AWS ML \vspace{1pt}
+       \begin{itemize}[itemsep=-2mm,topsep=0pt,partopsep=0pt,leftmargin=5mm]
+        \item Designed and implemented optimized ML framework to cluster  Cloudformation graphs and worked on new capabilities as microservices for the team’s flagship conversational AI agent.
+        % \item Designed a (3x) fast, metric-based, localized CloudWatch aggregation protocol.
+        \item Built Python-based dashboard app that accelerated PM screening and instantly visualized product’s unique engineering pipeline and development workflow and reduced experiment time \textbf{10×}.
+        \item Improved CI/CD infra, increasing successful deployments to the global fleet of \textbf{9M servers}.
+        \item Participated in oncall, handled customer tickets, investigated \& fixed critical software defects.
+
+% \item Built a dockerized dashboard app which is deeply integrated into debugging, testing and benchmarking workflows, boosting development speed by 45\%.
+% \item Maintained overview documents of the MLOps system to facilitate knowledge transfer and help new hires learn about the system.
+
+       \end{itemize} \vspace{2mm}
+\textbf{Department of Informatics, NMES, King's College London} \hfill \small{2021-22} \\
+       Teaching Associate: C++ programming (2021) and Operating Systems (2022) 
+       \begin{itemize}[itemsep=-2mm,topsep=2pt,partopsep=0pt,leftmargin=5mm]
+        \item Head TA for the Operating Systems (2022) module: tutored students in OS development, C/C++ programming and Unix.
+        \item Cut xv6 (educational) OS image build time \textbf{2x} with a CI pipeline using Packer and QEMU.
+       \end{itemize} \vspace{2mm}
+\textbf{Video Quality Analysis, Prime Video \& Amazon Studios} \hfill \small{2021-21} \\
+       SDE Intern - PV VQA \vspace{1pt}
+       \begin{itemize}[itemsep=-2mm,topsep=0pt,partopsep=0pt,leftmargin=5mm]
+        \item Created a livestream player with real-time notifications of A/V defects detected using computer vision models trained on synthetic media, replacing third-party legacy software and \textbf{cutting overhead}.
+        % \item Implemented microservice orchestration workflows between media conversion and defect detection services using AWS Step Functions and S3.
+        % \item Implemented a prototype audio codec in C++ (native code), including several optimized DSP components.
+        \item Contributed to AWS Elemental Media Distribution Services: MediaConnect, MediaStore, Kinesis.
+        \item Contributed to building a service emulator for evaluating microservice orchestration workflow (AWS Step Functions + S3) latency and resource cost at scale, increasing existing performance by \textbf{3x}.
+%         \item Discovered that networking stack features for improving CPU use through offloading and aggregation —
+% e.g., generic receive offload, interrupt coalescing, delayed ACKs — 
+        \item Investigated the performance accuracy and efficiency of pre-trained defect detector models against self-supervised models when fine-tuned on synthetic fine-grained audio/video.
+        % \item Built a light weight client supporting source-side deduplication for the company’s distributed filesystem for backups
+       \end{itemize} \\
+\textbf{Mobile Messaging, Snapchat Engineering} \hfill \small{2020-20} \\
+       Software Engineer Intern \vspace{1pt}
+       \begin{itemize}[itemsep=-1mm,topsep=0pt,partopsep=0pt,leftmargin=5mm]
+        \item Worked on cross-platform mobile messaging across Android and iOS.
+        \item Contributed to the C++ cross-language interface (Djinni) to the platform-specific code.
+        \item Implemented key features, including a cache-aware memory management framework and the high-level synthesis (HLS) protocol of Djinni; will be \textbf{deployed on millions} of datacenter servers
+       \end{itemize}
+\end{longtable}
+
+\vspace{-6mm}
+
+\section{Education}
+\begin{longtable}{p{15cm}p{2cm}@{}}
+\textbf{Department of Informatics, King's College London} & \small{2019-22} \\
+         BSc Hons., Computer Science, \textit{\textcolor{blue}{First-Class Honours.}}
+
+          \textcolor{YellowOrange}{Springer Nature Prize} (distinguished performance in second year studies.) \vspace{3mm} \\
+\textbf{DPS International School Singapore} & \small{2016-18}  \\
+         Highest score in academic year: A Level (A* A* A* A*) and AS Level (AAAA). Gold Scholar Badge and Excellence Scholarship (S\$6500).
+\end{longtable}
+
+
+\section{Projects}
+\label{sec:projects}
+
+\begin{longtable}{p{15cm}p{2cm}@{}}
+\textbf{libdeep} \href{https://github.com/muffpy/libdeep}{\faGithub } 
+% {\footnotesize C++, Python}
+\vspace{1pt}
+\begin{itemize}[itemsep=-2mm,topsep=0pt,leftmargin=5mm]
+\item Wrote automatic differentiation tools for various implemented functions. Support parameterized layers and loss functions.
+\item Implement GPU/CPU-aware NDarray library achieving comparable performance to numpy (2-3x slower).
+\end{itemize}
+& 2024 \\
+
+\textbf{LightDB} \href{https://github.com/muffpy/lightdb}{\faGithub } 
+% {\footnotesize C++} 
+\vspace{1pt}
+\begin{itemize}[itemsep=-2mm,topsep=0pt,leftmargin=5mm]
+\item Implements key components of a traditional RDBMS including Buffer Pool Manager (for memory management), Hash Index (storage engine), Query Executors \& Query Optimizer (operators \& optimizer), and Concurrency Control.
+\end{itemize}
+& 2023-24 \\
+
+\textbf{Netstack(xx)} \href{https://github.com/muffpy/netstackxx}{\faGithub } 
+% {\footnotesize C++}  
+\vspace{1pt}
+\begin{itemize}[itemsep=-2mm,topsep=0pt,leftmargin=5mm]
+\item Implement TCP protocol: assembler, receiver, sender; network interface following ARP (address resolution protocol) and IP routing in C++.
+\end{itemize}
+& 2023-24 \\
+
+\textbf{Common Architectures} \href{https://muffpy.github.io/assets/home/commonarch_press.pdf}
+{\faFilePdf} 
+% {\footnotesize Python, JavaScript, Django, AWS}
+\vspace{1pt}
+\begin{itemize}[itemsep=-2mm,topsep=0pt,leftmargin=5mm]
+\item In collaboration with Amazon DevOpsGuru team in London and Germany.
+\end{itemize}
+& 2022 \\
+
+\textbf{liballocs-gc}  
+% {\footnotesize Python, C, C++}
+\vspace{1pt}
+\begin{itemize}[itemsep=-2mm,topsep=0pt,leftmargin=5mm]
+\item In collaboration with my undergraduate supervisor Dr Stephen Kell.
+\item \href{https://github.com/muffpy/liballocsgc}{Code}, \href{https://drive.google.com/file/d/1_Y17HzvwnW6imM27xlZhJmW0-XSgMreF/view}{paper}, and liballocs \href{https://www.humprog.org/~stephen/research/liballocs/}{documentation}.
+\end{itemize}
+& 2022 \\
+
+\textbf{Fun-compiler} \href{https://github.com/muffpy/funlang}{\faGithub }  
+% {\footnotesize Scala}
+\vspace{1pt}
+\begin{itemize}[itemsep=-2mm,topsep=0pt,leftmargin=5mm]
+\item Built an LLVM-backed FUN language compiler in Scala which uses a CPS (continuous passing style) format-compliant intermediate K-language.
+\end{itemize}
+& 2021-22
+% \begin{itemize}[leftmargin=0em]
+%     % \item [] \href{https://github.com/muffpy/mrgo}{\textbf{mrgo}} a MapReduce implementation in Golang
+%     \item  [] \href{https://muffpy.github.io/assets/home/commonarch_press.pdf}{\textbf{common-archs}} 
+%     \item [] \href{https://github.com/muffpy/liballocsgc}{\textbf{liballocsgc}} 
+%     \item [] \href{https://github.com/muffpy/funlang}{\textbf{funlang}} 
+\end{longtable}
+\vspace{-5mm}
+% \section{Core Skills}
+% \begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+% \textbf{Client communication} & \textbf{Continuous learning} \\
+% Effectively convey technical ideas to non-technical audiences and practise active listening to meet client needs. & 
+
+% Proactively study and apply new knowledge across disciplines, adapting quickly to emerging technologies and methodologies. \\ \\
+% \textbf{Efficiency Management} & \textbf{Analytical Problem-solving} \\
+% Implement data-driven strategies and time management techniques to enhance personal and team efficiency. & 
+
+% Apply analytical thinking and logical reasoning to break down complex challenges into manageable components. \\
+% \end{tabular}
+
+\section{Referees}
+
+\begin{flushleft}
+\href{https://www.kcl.ac.uk/people/stephen-kell}{\textbf{Dr Stephen Kell}}, Lecturer in Computer Science, King's College London
+
+\href{https://www.kcl.ac.uk/people/laurence-tratt}{\textbf{Prof. Laurence Tratt}}, Professor of Software Development, King's College London
+
+\href{mailto:oswaldhs@amazon.co.uk}{\textbf{Oswaldo Hernandez}}, Software Development Manager, Amazon Web Services
+\end{flushleft}
+
+\end{document}
