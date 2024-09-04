@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}
+\geometry{
+	paper=a4paper, % Paper size, change to letterpaper for US letter size
+	top=2.25cm, % Top margin
+	bottom=2cm, % Bottom margin
+	left=4cm, % Left margin
+	right=3.5cm, % Right margin
+	headheight=0.75cm, % Header height
+	footskip=1cm, % Space from the bottom margin to the baseline of the footer
+	headsep=0.75cm, % Space from the top margin to the baseline of the header
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fontawesome5}
+\usepackage{hyperref}
+\definecolor{mypink3}{cmyk}{0, 0.7808, 0.6029, 0.2312}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=BrickRed
+}
+\definecolor{light-grey-pink}{HTML}{fffafb}
+\pagecolor{light-grey-pink}
+
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+% \usepackage{mathptmx}
+
+\usepackage{fontspec}
+\setmainfont{MinionPro}[
+  UprightFont = *-Regular,
+  ItalicFont = *-It,
+  BoldFont = *-Bold,
+  BoldItalicFont = *-BoldIt,
+  Extension = .ttf
+]
+\newfontfamily\myfont{adobehebrew-regular.otf}
+
+\pagenumbering{gobble}
+
+% Adjust the section titles
+\titleformat{\section}{\scshape\raggedright\large}{}{0em}{}[]
+\let\oldtitleline\titleline
+\renewcommand{\titleline}{\oldtitleline*}
+\setlength{\titlewidth}{0.05\textwidth}
+
+\usepackage{marginnote} % Required to output text in the margin
+
+\newcommand{\years}[1]{\marginnote{\footnotesize\myfont #1}} % New command for adding years to the margin
+\renewcommand*{\raggedleftmarginnote}{} % Left-align the years in the margin
+\setlength{\marginparsep}{20pt} % Move the margin content closer to the text
+\reversemarginpar % Margin text to be output into the left margin instead of the default right margin
